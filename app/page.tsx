@@ -1,69 +1,84 @@
-import Image from "next/image";
+import Link from "next/link";
+import {
+  ArrowRight,
+  FileBarChart,
+  Network,
+  ShieldAlert,
+  ShieldCheck,
+  Siren,
+  LayoutDashboard,
+} from "lucide-react";
+import { ORG } from "@/lib/data";
 
-export default function Home() {
+const MODULES = [
+  { icon: LayoutDashboard, label: "Executive Dashboard" },
+  { icon: ShieldAlert, label: "Risk Management" },
+  { icon: ShieldCheck, label: "Compliance" },
+  { icon: Network, label: "Third-Party Risk" },
+  { icon: Siren, label: "Incident Management" },
+  { icon: FileBarChart, label: "Reports" },
+];
+
+export default function EntryPage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <main className="flex min-h-screen flex-1 items-center justify-center bg-slate-950 px-4">
+      <div className="w-full max-w-md">
+        <div className="rounded-2xl border border-slate-800 bg-slate-900 p-8 shadow-2xl">
+          <div className="mb-6 flex items-center gap-3">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-500 text-lg font-bold text-white">
+              N
+            </div>
+            <div>
+              <h1 className="text-xl font-semibold tracking-wide text-white">
+                NEXORA <span className="text-indigo-400">GRC</span>
+              </h1>
+              <p className="text-xs text-slate-400">
+                Governance, Risk &amp; Compliance. Connected.
+              </p>
+            </div>
+          </div>
+
+          <p className="mb-5 text-sm leading-relaxed text-slate-300">
+            One platform to manage enterprise risks, compliance frameworks,
+            third-party exposure and incidents — with executive visibility
+            across all of it.
+          </p>
+
+          <div className="mb-6 grid grid-cols-2 gap-2">
+            {MODULES.map(({ icon: Icon, label }) => (
+              <div
+                key={label}
+                className="flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-800/50 px-3 py-2"
+              >
+                <Icon className="h-3.5 w-3.5 shrink-0 text-indigo-400" />
+                <span className="text-xs text-slate-300">{label}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="mb-6 rounded-lg border border-slate-800 bg-slate-800/40 px-4 py-3">
+            <p className="text-xs text-slate-400">Demo workspace</p>
+            <p className="mt-0.5 text-sm font-medium text-slate-200">{ORG.name}</p>
+            <p className="text-xs text-slate-400">
+              {ORG.industry} · {ORG.employees.toLocaleString()} employees ·{" "}
+              {ORG.locations.join(", ")}
+            </p>
+          </div>
+
+          <Link
+            href="/dashboard"
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-indigo-400"
+          >
+            Enter Demo Workspace
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+
+          <p className="mt-4 text-center text-[11px] text-slate-500">
+            Demo environment · No sign-in required · Signed in as Sarah Mathew,
+            Risk &amp; Compliance Manager
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </div>
+    </main>
   );
 }
